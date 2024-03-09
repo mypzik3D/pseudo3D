@@ -1,0 +1,3 @@
+/home/mypzuk/CLionProjects/pseudo3D_by_mypzik3D/cmake-build-debug/CMakeFiles/pseudo3D_by_mypzik3D.dir
+/home/mypzuk/CLionProjects/pseudo3D_by_mypzik3D/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/mypzuk/CLionProjects/pseudo3D_by_mypzik3D/cmake-build-debug/CMakeFiles/rebuild_cache.dir
