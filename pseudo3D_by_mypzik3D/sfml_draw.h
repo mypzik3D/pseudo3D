@@ -1,9 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+sf::RectangleShape vertLine(sf::Color color, int x, int y, float len){
+    sf::RectangleShape shp;
+    shp.setSize(sf::Vector2f(1,len));
+    shp.setPosition(x,y);
+    shp.setFillColor(color);
+    return (shp);
+}
+
 sf::RectangleShape setPixel(sf::Color color, int x, int y){
     sf::RectangleShape shp;
-    shp.setSize(sf::Vector2f (1,1));
+    shp.setSize(sf::Vector2f(1,1));
     shp.setPosition(x,y);
     shp.setFillColor(color);
     return (shp);
@@ -40,9 +48,9 @@ void draw_mini_map(sf::RenderWindow& window,int scale_map, sf::Color color,sf::C
     }
     sf::ConvexShape shp;
     shp.setPointCount(sizeXdis+1);
-    shp.setPoint(0,sf::Vector2f(playerPos.x,playerPos.y));
+    shp.setPoint(0,sf::Vector2f(playerPos.x/scale*scale_map,playerPos.y/scale*scale_map));
     for(int i=0;i<sizeXdis;i++){
-        shp.setPoint(i+1,sf::Vector2f(meshr[i].x,meshr[i].y));
+        shp.setPoint(i+1,sf::Vector2f(meshr[i].x/scale*scale_map,meshr[i].y/scale*scale_map));
     }
     shp.setPosition(0,0);
     shp.setOutlineColor(player_color);

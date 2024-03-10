@@ -8,7 +8,9 @@ ray RayCast(float angle,int mapc[sizey][sizex]){
     bool flag = false;
     float step_x = cos(angle*PI/180);
     float step_y = sin(angle*PI/180);
-    vector2 pos = playerPos;
+    vector2 pos;
+    pos.x = playerPos.x;
+    pos.y = playerPos.y;
     for(int i = 0; i < distance; i++){
         for(int y = 0; y < sizex; y++){
             for(int x = 0; x < sizex; x++){

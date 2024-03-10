@@ -2,7 +2,6 @@
 #include "raycasting.h"
 #include "data.h"
 #include "draw.h"
-#include "delay.h"
 #include "sfml_draw.h"
 
 
@@ -16,7 +15,9 @@ int main() {
     playerPos.x = 50;
     playerPos.y = 50;
 
-    int fps=60;
+    window.setFramerateLimit(FPS);
+
+
 
     while (true){
         timer++;
@@ -29,7 +30,6 @@ int main() {
         }
         //sleep
         print("step calc to: "+std::to_string(timer));
-        sleepMS(FPS);
         int angle = r*FOV+sizeYdis*FOV;
 
         float step_x = cos(angle*PI/180)*speed;
@@ -57,26 +57,24 @@ int main() {
             //raycast
         int cent = sizeYdis/2;
         print("raycast to: "+std::to_string(timer));
-        window.clear(sf::Color(34, 40, 49));
-        window.draw(Rectangle(sf::Color(8, 217, 214),0, 0,sizeXdis,cent));
+        window.clear(ground);
+        window.draw(Rectangle(sky,0, 0,sizeXdis,cent));
 
         //std::cout << "| test window | " << get_move() << " | " << fps << " FPS |" << "Yes..." << "\n";
         for(int i = 0; i < sizeXdis; i++){
             int rotate = (i+r)*FOV;
-            rotate%360;
+            rotate%180;
             ray rc = RayCast(rotate,map);
-            print(std::to_string(rc.dist));
+            if(i == sizeXdis/2)
+                print(std::to_string(rc.dist));
             meshr[i]=rc.pos;
             if(rc.dist > 0) {
-                float sizes = sizeYdis/rc.dist*5;
-                for (int p = 0; p < sizes * 2; p++) {
-                    sf::Color c = sf::Color(255 - rc.dist * color_coef, 255 - rc.dist * color_coef,
-                                            255 - rc.dist * color_coef, 255);
-                    window.draw(setPixel(c, i, cent - (sizes) + p));
-                }
+                float sizes = sizeYdis/rc.dist*size_coef;
+                sf::Color c = sf::Color(255 - rc.dist * color_coef, 255 - rc.dist * color_coef,255 - rc.dist * color_coef, 255);
+                window.draw(vertLine(c,i,cent-sizes,sizes*2));
             }
         }
-        draw_mini_map(window,10,sf::Color(0, 173, 181),sf::Color(238, 238, 238), step_x, step_y);
+        draw_mini_map(window,sizeMiniMap,color_walls,color_player, step_x, step_y);
         window.display();
         print("raycast done to: "+ std::to_string(timer));
     }
