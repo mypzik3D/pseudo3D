@@ -29,10 +29,6 @@ sf::RectangleShape Rectangle(sf::Color color, float x, float y,int sizeX,int siz
     return (shp);
 }
 
-
-
-vector2 meshr[sizeXdis];
-
 void draw_mini_map(sf::RenderWindow& window,int scale_map, sf::Color color,sf::Color player_color,float spx,float spy){
     window.draw(Rectangle(sf::Color(45, 64, 89),0,0,scale_map*sizex,scale_map*sizey));
     for(int y = 0; y < sizey; y++){
@@ -55,5 +51,5 @@ void draw_mini_map(sf::RenderWindow& window,int scale_map, sf::Color color,sf::C
     window.draw(shp);
 
     window.draw(setRound_size(player_color,playerPos.x/scale*scale_map-scale_map/2,playerPos.y/scale*scale_map-scale_map/2,scale_map));
-    window.draw(setRound_size(player_color,(playerPos.x/scale+spx)*scale_map-scale_map/4,(playerPos.y/scale+spy)*scale_map-scale_map/4,scale_map/2));
+    //window.draw(setRound_size(player_color,(playerPos.x/scale+spx)*scale_map-scale_map/4,(playerPos.y/scale+spy)*scale_map-scale_map/4,scale_map/2));
 }

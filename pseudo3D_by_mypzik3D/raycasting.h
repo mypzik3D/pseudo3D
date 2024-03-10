@@ -2,38 +2,6 @@
 #include "cmath"
 #include "data.h"
 
-//world size
-#define sizex 10
-#define sizey 10
-
-//world scale
-#define scale 10
-
-//disctance ray
-#define distance 50
-#define PI 3.14159265
-
-class ray{
-public:
-    float dist;
-    vector2 pos;
-};
-
-int map[sizey][sizex]{
-        {1,1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1,1}
-};
-vector2 playerPos;
-
-
 ray RayCast(float angle,int mapc[sizey][sizex]){
     ray Ray;
     Ray.dist=0;

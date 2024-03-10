@@ -15,7 +15,6 @@ add_executable(pseudo3D_by_mypzik3D main.cpp
         delay.h
         raycasting.h
         data.h
-        control.h
         sfml_draw.h
 )
 target_link_libraries(pseudo3D_by_mypzik3D PRIVATE sfml-graphics)

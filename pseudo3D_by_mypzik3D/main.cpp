@@ -1,14 +1,10 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include "raycasting.h"
 #include "data.h"
 #include "draw.h"
 #include "delay.h"
-#include "control.h"
 #include "sfml_draw.h"
 
-#define color_coef 4
-#define speed 1
 
 
 int r;
@@ -21,7 +17,6 @@ int main() {
     playerPos.y = 50;
 
     int fps=60;
-    float msize= sizeYdis;
 
     while (true){
         timer++;
@@ -34,7 +29,7 @@ int main() {
         }
         //sleep
         print("step calc to: "+std::to_string(timer));
-        sleepMS(fps);
+        sleepMS(FPS);
         int angle = r*FOV+sizeYdis*FOV;
 
         float step_x = cos(angle*PI/180)*speed;
@@ -43,10 +38,10 @@ int main() {
 
         print("input work to: "+std::to_string(timer));
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-            r-=30;
+            r-=speed_rotate;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-            r+=30;
+            r+=speed_rotate;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
             playerPos.x+=step_x;
