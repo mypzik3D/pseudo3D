@@ -5,6 +5,7 @@
 //world size
 #define sizex 10
 #define sizey 10
+
 //world scale
 #define scale 10
 
@@ -12,17 +13,17 @@
 #define distance 100
 #define PI 3.14159265
 
-int map[sizex][sizey]{
-        {1,1,1,1,1,1,1,1,1},
-        {1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,1,1,0,0,1},
-        {1,0,0,0,1,1,0,0,1},
-        {1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,1},
-        {1,0,0,0,0,0,0,0,1},
-        {1,1,1,1,1,1,1,1,1}
+int map[sizey][sizex]{
+        {1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,1,0,1},
+        {1,0,0,1,1,0,0,1,0,1},
+        {1,0,0,1,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1},
+        {1,0,0,0,0,0,0,0,0,1},
+        {1,0,1,0,0,0,0,1,1,1},
+        {1,0,0,0,0,0,0,1,1,1},
+        {1,1,1,1,1,1,1,1,1,1}
 };
 vector2 playerPos;
 
@@ -35,7 +36,7 @@ float RayCast(float angle,int mapc[sizex][sizey]){
             for(int x = 0; x < sizex; x++){
                 if(mapc[x][y]>=1) {
                     if (pos.x >= (float)x*scale && pos.x <= ((float)x+1)*scale && pos.y >= (float)y*scale && pos.y <= ((float)y+1)*scale) {
-                        return (sqrt(pow(pos.x, 2) + pow(pos.y, 2)));
+                        return (sqrt(pow(pos.x-playerPos.x, 2) + pow(pos.y-playerPos.y, 2)));
                     }
                 }
             }

@@ -6,10 +6,8 @@
 int r;
 
 int main() {
-    playerPos.x = 30;
-    playerPos.y = 30;
-    map[3][0] = 1;
-    map[9][3] = 1;
+    playerPos.x = 25;
+    playerPos.y = 25;
 
     int fps;
     std::cout << "Input fps => ";
