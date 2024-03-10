@@ -9,8 +9,8 @@ static long long int getMS()
     return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
 }
 
-void sleepMS(int FPS)
+void sleepMS(int fps)
 {
-    long long int end = getMS() + (1000/FPS);
+    long long int end = getMS() + (1000/fps);
     while (getMS() < end);
 }
