@@ -2,13 +2,13 @@
 #include "string"
 
 //display
-#define sizeX 60
-#define sizeY 30
+#define sizeXdis 600
+#define sizeYdis 400
 
-#define FOV 3
+#define FOV 0.1
 
 std::string objects[8]{"  ", "░░","▒▒","▓▓","██"};
-int worldMap[sizeX][sizeY];
+int worldMap[sizeXdis][sizeYdis];
 
 
 //classs

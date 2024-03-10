@@ -1,52 +1,89 @@
+#include <SFML/Graphics.hpp>
 #include <iostream>
 #include "raycasting.h"
-#include "draw.h"
 #include "data.h"
+#include "draw.h"
 #include "delay.h"
+#include "control.h"
+#include "sfml_draw.h"
+
+#define color_coef 4
+#define speed 1
+
+
 int r;
+int timer;
 
 int main() {
-    playerPos.x = 30;
-    playerPos.y = 30;
-    map[3][0] = 1;
-    map[9][3] = 1;
+    sf::RenderWindow window(sf::VideoMode(sizeXdis, sizeYdis), "SFML Window");
 
-    int fps;
-    std::cout << "Input fps => ";
-    std::cin >> fps;
+    playerPos.x = 50;
+    playerPos.y = 50;
 
+    int fps=60;
+    float msize= sizeYdis;
 
     while (true){
+        timer++;
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
         //sleep
+        print("step calc to: "+std::to_string(timer));
         sleepMS(fps);
+        int angle = r*FOV+sizeYdis*FOV;
 
-        //rotate
-        r++;
-        if(r >= 360)
-            r=0;
+        float step_x = cos(angle*PI/180)*speed;
+        float step_y = sin(angle*PI/180)*speed;
+        print("step calc done to: "+std::to_string(timer));
 
-        //raycast
-        clearMap();
-        std::cout << "| test window | " << " | " << fps << " FPS |" << "Yes..." << "\n";
-        for(int i = 0; i < sizeX; i++){
-            float rotate = (i+r)*FOV;
-            float rc = RayCast(rotate,map);
-            int cent = sizeY/2;
-            int sizes = 150/rc;
-            for(int p = 0; p < sizes*2; p++){
-                if(rc < 20)
-                    setPixel(5,i,cent-(sizes)+p);
-                if(rc >= 10 && rc < 20)
-                    setPixel(4,i,cent-(sizes)+p);
-                if(rc >= 20 && rc < 40)
-                    setPixel(3,i,cent-(sizes)+p);
-                if(rc >= 40 && rc < 60)
-                    setPixel(2,i,cent-(sizes)+p);
-                if(rc >= 60)
-                    setPixel(1,i,cent-(sizes)+p);
+        print("input work to: "+std::to_string(timer));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+            r-=30;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+            r+=30;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+            playerPos.x+=step_x;
+            playerPos.y+=step_y;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+            playerPos.x-=step_x;
+            playerPos.y-=step_y;
+        }
+        print("input work done to: "+std::to_string(timer));
+
+
+            //raycast
+        int cent = sizeYdis/2;
+        print("raycast to: "+std::to_string(timer));
+        window.clear(sf::Color(34, 40, 49));
+        window.draw(Rectangle(sf::Color(8, 217, 214),0, 0,sizeXdis,cent));
+
+        //std::cout << "| test window | " << get_move() << " | " << fps << " FPS |" << "Yes..." << "\n";
+        for(int i = 0; i < sizeXdis; i++){
+            int rotate = (i+r)*FOV;
+            rotate%360;
+            ray rc = RayCast(rotate,map);
+            print(std::to_string(rc.dist));
+            meshr[i]=rc.pos;
+            if(rc.dist > 0) {
+                float sizes = sizeYdis/rc.dist*5;
+                for (int p = 0; p < sizes * 2; p++) {
+                    sf::Color c = sf::Color(255 - rc.dist * color_coef, 255 - rc.dist * color_coef,
+                                            255 - rc.dist * color_coef, 255);
+                    window.draw(setPixel(c, i, cent - (sizes) + p));
+                }
             }
         }
-        draw();
+        draw_mini_map(window,10,sf::Color(0, 173, 181),sf::Color(238, 238, 238), step_x, step_y);
+        window.display();
+        print("raycast done to: "+ std::to_string(timer));
     }
     return 0;
 }
