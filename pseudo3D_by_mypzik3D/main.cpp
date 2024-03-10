@@ -17,8 +17,6 @@ int main() {
 
     window.setFramerateLimit(FPS);
 
-
-
     while (true){
         timer++;
 
@@ -80,6 +78,3 @@ int main() {
     }
     return 0;
 }
-
-
-

@@ -14,9 +14,9 @@ ray RayCast(float angle,int mapc[sizey][sizex]){
     for(int i = 0; i < distance; i++){
         for(int y = 0; y < sizex; y++){
             for(int x = 0; x < sizex; x++){
-                if(mapc[x][y]>=1) {
+                if(mapc[y][x]>=1) {
                     if (pos.x >= (float)x*scale && pos.x <= ((float)x+1)*scale && pos.y >= (float)y*scale && pos.y <= ((float)y+1)*scale) {
-                        Ray.dist=sqrt(pow(pos.x, 2) + pow(pos.y, 2));
+                        Ray.dist=sqrt(pow(pos.x-playerPos.x+scale/2, 2) + pow(pos.y-playerPos.y+scale/2, 2));
                         flag= true;
                     }
                 }
