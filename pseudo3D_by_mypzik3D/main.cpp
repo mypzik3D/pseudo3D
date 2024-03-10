@@ -67,8 +67,11 @@ int main() {
                 print(std::to_string(rc.dist));
             meshr[i]=rc.pos;
             if(rc.dist > 0) {
+                float dst = rc.dist;
+                if(dst * color_coef>=unbrightness)
+                    dst = unbrightness/color_coef;
                 float sizes = sizeYdis/rc.dist*size_coef;
-                sf::Color c = sf::Color(255 - rc.dist * color_coef, 255 - rc.dist * color_coef,255 - rc.dist * color_coef, 255);
+                sf::Color c = sf::Color(255 - dst * color_coef, 255 - dst * color_coef,255 - dst * color_coef, 255);
                 window.draw(vertLine(c,i,cent-sizes,sizes*2));
             }
         }

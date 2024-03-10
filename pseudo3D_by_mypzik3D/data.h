@@ -23,6 +23,7 @@
 #define sizeYdis 600
 #define size_coef 5
 #define color_coef 3
+#define unbrightness 200 //0-255
 
 //minimap
 #define sizeMiniMap 10
