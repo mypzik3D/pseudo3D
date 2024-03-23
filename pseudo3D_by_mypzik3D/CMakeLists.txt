@@ -12,7 +12,6 @@ FetchContent_MakeAvailable(SFML)
 
 add_executable(pseudo3D_by_mypzik3D main.cpp
         draw.h
-        delay.h
         raycasting.h
         data.h
         sfml_draw.h
